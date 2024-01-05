@@ -68,9 +68,8 @@ export class Strategies {
     passport.use(
       new GoogleStrategy(
         {
-          clientID:
-            "228782024375-ptqs375ut3fjq6oqvcjkl4t1voiqr493.apps.googleusercontent.com",
-          clientSecret: "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",
+          clientID: process.env.GOOGLE_CLIENT_ID as string,
+          clientSecret: process.env.GOOGLE_SECRET_KEY as string,
           callbackURL: "/api/login/google/callback",
           passReqToCallback: true,
           scope: ["email", "profile"],
@@ -148,8 +147,8 @@ export class Strategies {
     passport.use(
       new FacebookStrategy(
         {
-          clientID: "1812921102479210",
-          clientSecret: "cb6a404f5b2fd7b2c769ddd0166fe8db",
+          clientID: process.env.FACEBOOK_CLIENT_ID as string,
+          clientSecret: process.env.FACEBOOK_SECRET_KEY as string,
           callbackURL: "http://localhost:8000/api/login/facebook/callback", // Adjust the callback URL
           profileFields: [
             "id",

@@ -15,8 +15,8 @@ export default class NodeMailer {
         secure: true,
         auth: {
           // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-          user: "sherazasgher37@gmail.com",
-          pass: "wrzz gipl duko oirv",
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS,
         },
       });
     } catch (error) {

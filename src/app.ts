@@ -4,6 +4,8 @@ import authRouter from "./routes/authRoutes";
 import staticRouter from "./routes/static";
 import path from "path";
 import PassportConfig from "./passport/PassportConfig";
+import dotenv from "dotenv";
+dotenv.config();
 const port = process.env.PORT || 8000;
 
 const app = AppMiddlewares();
