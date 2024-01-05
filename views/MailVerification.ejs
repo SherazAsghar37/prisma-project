@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification</title>
+  </head>
+  <body>
+    <h1>Email Verification</h1>
+    <p>verification code has been sent to your email</p>
+    <form
+      id="verificationForm"
+      action="/api/signup/password/verify"
+      method="POST"
+    >
+      <label for="otp">Enter your verification code </label>
+      <br />
+      <input type="text" name="otp" id="otp" placeholder="123456" />
+      <input type="hidden" name="email" value="<%= email %>" />
+
+      <button type="submit" id="verifyButton">Verify</button>
+    </form>
+
+    <div id="timer">Time remaining: 60 seconds</div>
+    <div>
+      <% if (locals.response) { %>
+      <p><%= response %></p>
+      <% } %>
+    </div>
+    <div>
+      <% if (locals.email) { %>
+      <p><%= email %></p>
+      <% } %>
+    </div>
+
+    <script>
+      // Set the initial time and timestamp
+      let timeRemaining = 60;
+      const startTime = Date.now();
+
+      // Update the timer every second
+      const timerInterval = setInterval(function () {
+        timeRemaining--;
+
+        // Update the timer display
+        document.getElementById(
+          "timer"
+        ).textContent = `Time remaining: ${timeRemaining} seconds`;
+
+        // Check if the timer has reached 0
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval); // Stop the timer
+          //document.getElementById("verifyButton").disabled = true; // Disable the button
+          document.getElementById(
+            "timer"
+          ).textContent = `Kindly generate code again.`;
+        }
+      }, 1000);
+
+      // Function to handle verification code submission
+    </script>
+  </body>
+</html>

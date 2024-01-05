@@ -1,0 +1,73 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+model Author {
+    // Unique identifier for a user
+    profile_id      String     @id @default(uuid())
+    uid             String     @unique
+    // Profilename chosen by the user
+    full_name       String     @default("Noob")
+    // Bio or description of the user
+    bio             String     @default("")
+    // Number of followers for the user
+    followers_count Int        @default(0)
+    // Number of users the user is following
+    following_count Int        @default(0)
+    books Book[]
+    // author_id String @unique
+    user User? @relation(fields: [uid],references: [uid])
+    // Saved Play List
+   
+}
+
+model Book{
+  id Int @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  title String
+  is_fiction Boolean
+  date_published DateTime
+  author Author     @relation(fields: [author_id],references: [profile_id])
+  author_id String
+  
+}
+
+model User{
+    uid String @id @default( uuid())
+    password String?
+    email String    @unique
+    facebook_id String? @unique
+    facebook Facebook? @relation(fields: [facebook_id],references: [facebook_id]) 
+    google_id String?  @unique
+    google Google? @relation(fields: [google_id],references: [google_id]) 
+    // author_id String? @unique
+    author Author?
+
+}
+
+model Facebook{
+    facebook_id String @id @unique
+    user User?
+    access_token String?
+    refresh_token String?
+}
+
+model Google{
+    google_id String @id @unique
+    user User?
+    access_token String?
+    refresh_token String?
+}
+
+model EmailVerifiacitonToken{
+    email String @unique
+    otp Int @unique
+    password String
+    createdAt DateTime @default(now())
+    updateAt DateTime   @updatedAt
+}

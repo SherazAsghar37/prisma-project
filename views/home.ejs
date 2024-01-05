@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        background-color: #000000;
+        color: #ffffff;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h1>Authentication</h1>
+    <div>
+      <form action="/api/login/google" method="GET">
+        <button type="submit">Google Login</button>
+      </form>
+      <form action="/api/login/facebook" method="GET">
+        <button type="submit">Facebook Login</button>
+      </form>
+    </div>
+  </body>
+</html>
